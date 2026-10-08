@@ -200,7 +200,7 @@ export function CreateLinkForm({
             placeholder={openAmount ? "User defined amount" : "0"}
             onNumberChange={setAmount}
             className={cn(
-              "min-w-0 flex-1 bg-transparent font-montserrat text-[26px] font-medium outline-none border-0",
+              "min-w-0 flex-1 bg-transparent font-montserrat text-[16px] pl-0 font-medium outline-none border-0",
               openAmount && "cursor-not-allowed",
               amountInvalid
                 ? "text-danger placeholder:text-danger"

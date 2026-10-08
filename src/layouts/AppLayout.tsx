@@ -38,8 +38,8 @@ export function AppLayout() {
       </div>
       <AppSidebar />
       <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
-        <header className="relative flex h-[65px] shrink-0 items-center border-b border-black/10 px-2 md:px-5 lg:px-[26px]">
-          <h1 className="min-w-0 truncate font-montserrat text-[20px] font-medium text-black">
+        <header className="relative flex h-[52px] shrink-0 items-center border-b border-black/10 px-2 md:px-5 lg:px-[26px]">
+          <h1 className="min-w-0 truncate font-montserrat text-[16px] font-medium text-black">
             {title}
           </h1>
         </header>

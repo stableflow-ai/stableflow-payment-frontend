@@ -125,10 +125,18 @@ export function AuthPasswordField({
   );
 }
 
+const CODE_LEN_VALIDATION = "Field validation for 'Code' failed on the 'len' tag";
+
 export function authErrorMessage(error: unknown, fallback = "Something went wrong"): string {
   if (error instanceof ApiError) return error.message;
   if (error instanceof Error && error.message) return error.message;
   return fallback;
+}
+
+export function registerErrorMessage(error: unknown, fallback = "Something went wrong"): string {
+  const message = authErrorMessage(error, fallback);
+  if (message.includes(CODE_LEN_VALIDATION)) return "The verification code is invalid.";
+  return message;
 }
 
 export { AUTH_FORM_CLASS };
