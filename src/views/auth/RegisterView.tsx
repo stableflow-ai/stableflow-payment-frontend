@@ -1,8 +1,8 @@
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@stableflow/pay-ui/button";
 import { Icon2Right } from "@stableflow/pay-ui/icons/to-right";
-import { useRegisterMutation } from "@/hooks/use-auth-api";
+import { useRegisterMutation, useSendRegisterCodeMutation } from "@/hooks/use-auth-api";
 import useToast from "@/hooks/use-toast";
 import { AuthShell } from "./AuthShell";
 import {
@@ -10,16 +10,20 @@ import {
   AuthField,
   AuthPasswordField,
   authErrorMessage,
+  registerErrorMessage,
   AUTH_FORM_CLASS,
 } from "./auth-shared";
 import {
   AUTH_LINK_ACCENT_CLASS,
   AUTH_LINK_CLASS,
+  CODE_MAX_LENGTH,
   EMAIL_MAX_LENGTH,
-  INVITE_CODE_MAX_LENGTH,
   NAME_MAX_LENGTH,
   PASSWORD_MAX_LENGTH,
   PASSWORD_MIN_LENGTH,
+  SEND_CODE_COOLDOWN_SECONDS,
+  SEND_CODE_TEXT_CLASS,
+  emailRuleError,
   registerFormError,
 } from "./config";
 import { postAuthPath } from "./post-auth-path";
@@ -31,16 +35,43 @@ export function RegisterView() {
   const returnTo = returnToFromSearch(params.toString());
   const toast = useToast();
   const registerMutation = useRegisterMutation();
+  const sendCodeMutation = useSendRegisterCodeMutation();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [inviteCode, setInviteCode] = useState("");
+  const [code, setCode] = useState("");
+  const [cooldownLeft, setCooldownLeft] = useState(0);
+
+  useEffect(() => {
+    if (cooldownLeft <= 0) return;
+    const timer = window.setInterval(() => {
+      setCooldownLeft((current) => (current <= 1 ? 0 : current - 1));
+    }, 1000);
+    return () => window.clearInterval(timer);
+  }, [cooldownLeft]);
+
+  const sendCode = async () => {
+    const ruleError = emailRuleError(email);
+    if (ruleError) {
+      toast.fail({ title: ruleError });
+      return;
+    }
+    try {
+      await sendCodeMutation.mutateAsync({ email: email.trim() });
+      setCooldownLeft(SEND_CODE_COOLDOWN_SECONDS);
+      toast.success({ title: "Verification code sent" });
+    } catch (cause) {
+      toast.fail({
+        title: authErrorMessage(cause, "Unable to send verification code"),
+      });
+    }
+  };
 
   const submit = async (event: FormEvent) => {
     event.preventDefault();
-    const ruleError = registerFormError(name, email, password, confirmPassword, inviteCode);
+    const ruleError = registerFormError(name, email, password, confirmPassword, code);
     if (ruleError) {
       toast.fail({ title: ruleError });
       return;
@@ -50,12 +81,12 @@ export function RegisterView() {
         name: name.trim(),
         email: email.trim(),
         password,
-        inviteCode: inviteCode.trim(),
+        code: code.trim(),
       });
       navigate(postAuthPath(session.user, null), { replace: true });
     } catch (cause) {
       toast.fail({
-        title: authErrorMessage(cause, "Unable to create account"),
+        title: registerErrorMessage(cause, "Unable to create account"),
       });
     }
   };
@@ -108,13 +139,25 @@ export function RegisterView() {
           className="mt-5"
         />
         <AuthField
-          id="invite-code"
-          label="Invite code"
-          value={inviteCode}
-          onChange={setInviteCode}
-          placeholder="Invite code"
-          autoComplete="off"
-          maxLength={INVITE_CODE_MAX_LENGTH}
+          id="register-code"
+          label="Verify Code"
+          value={code}
+          onChange={setCode}
+          placeholder="Code"
+          autoComplete="one-time-code"
+          maxLength={CODE_MAX_LENGTH}
+          trailing={
+            <button
+              type="button"
+              disabled={cooldownLeft > 0 || sendCodeMutation.isPending}
+              onClick={() => {
+                void sendCode();
+              }}
+              className={SEND_CODE_TEXT_CLASS}
+            >
+              {cooldownLeft > 0 ? `${cooldownLeft}s` : "Send Code"}
+            </button>
+          }
           className="mt-5"
         />
 

@@ -2,6 +2,7 @@
  * Auth mutations and profile query.
  *   POST /v1/pay/auth/login
  *   POST /v1/pay/auth/register
+ *   POST /v1/pay/auth/register/code
  *   POST /v1/pay/change-password
  *   POST /v1/pay/reset-password
  *   POST /v1/pay/reset-password/code
@@ -18,6 +19,7 @@ import {
   login,
   register,
   resetPassword,
+  sendRegisterCode,
   sendResetPasswordCode,
 } from "@/api/auth";
 import { queryKeys } from "@/api/query-keys";
@@ -50,6 +52,12 @@ export function useRegisterMutation() {
     onSuccess: (session) => {
       applySession(session.token, session.user);
     },
+  });
+}
+
+export function useSendRegisterCodeMutation() {
+  return useMutation({
+    mutationFn: sendRegisterCode,
   });
 }
 

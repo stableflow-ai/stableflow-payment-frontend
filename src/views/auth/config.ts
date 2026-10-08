@@ -13,7 +13,6 @@ export const AUTH_LINK_CLASS =
 export const AUTH_LINK_ACCENT_CLASS = "text-[#3f8afb] hover:text-[#3f8afb]/90";
 
 export const NAME_MAX_LENGTH = 50;
-export const INVITE_CODE_MAX_LENGTH = 10;
 export const EMAIL_MAX_LENGTH = 100;
 export const CODE_MAX_LENGTH = 20;
 export const PASSWORD_MIN_LENGTH = 8;
@@ -68,15 +67,6 @@ export function passwordRuleError(password: string): string | null {
   return null;
 }
 
-export function inviteCodeRuleError(inviteCode: string): string | null {
-  const trimmed = inviteCode.trim();
-  if (!trimmed) return "Invite code is required";
-  if (trimmed.length > INVITE_CODE_MAX_LENGTH) {
-    return `Invite code must be at most ${INVITE_CODE_MAX_LENGTH} characters`;
-  }
-  return null;
-}
-
 export function confirmPasswordRuleError(
   password: string,
   confirmPassword: string,
@@ -93,14 +83,14 @@ export function registerFormError(
   email: string,
   password: string,
   confirmPassword: string,
-  inviteCode: string,
+  code: string,
 ): string | null {
   return (
     nameRuleError(name) ??
     emailRuleError(email) ??
     passwordRuleError(password) ??
     confirmPasswordRuleError(password, confirmPassword) ??
-    inviteCodeRuleError(inviteCode)
+    codeRuleError(code)
   );
 }
 
