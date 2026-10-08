@@ -26,7 +26,7 @@ Payout / request-payment / Near Intents **APIs, hooks, wallet adapters, and conf
 ## Auth
 
 - Login: `email` + `password`.
-- Register: `name` (max 50), `email` (max 100), `password` (8–50), confirm password must match, `inviteCode` (max 10).
+- Register: `name` (max 50), `email` (max 100), `password` (8–50), confirm password must match, verification `code` (max 20). Send Code calls `POST /v1/pay/auth/register/code` and starts a 60s cooldown after success.
 - Session: Zustand `useAuthStore` with `persist` middleware. Types: `AuthUser` (`id`, `email`, `name`, `guideCompleted`). Do **not** read or write `localStorage` from feature code. `SessionBootstrap` listens for the `storage` event on `stableflow-pay.session`, clears the Query cache, and `persist.rehydrate()`s so another tab's login or logout is applied here.
 - Unauthenticated `/` redirects to `/login`. Authenticated `/login` or `/register` redirects via `postAuthPath`: a safe `returnTo` when present, else `/guide/payment-link` when `guideCompleted` is false and the user has not Skip-All'd, else `/`.
 - After login, navigate the same way (`postAuthPath`). After register, `returnTo` is ignored so a leftover query from the previous session cannot skip onboarding. Session restore and refresh on `/` do **not** auto-send the user to `/guide`.

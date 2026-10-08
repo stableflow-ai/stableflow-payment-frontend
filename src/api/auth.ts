@@ -7,6 +7,7 @@ import type {
   ChangePasswordBody,
   LoginBody,
   RegisterBody,
+  RegisterCodeBody,
   ResetPasswordBody,
   ResetPasswordCodeBody,
 } from "@/types/auth";
@@ -47,6 +48,14 @@ export async function register(body: RegisterBody) {
       auth: false,
     }),
   );
+}
+
+export function sendRegisterCode(body: RegisterCodeBody) {
+  return http<void>(`${PAY_API_PREFIX}/auth/register/code`, {
+    method: "POST",
+    body,
+    auth: false,
+  });
 }
 
 export function changePassword(body: ChangePasswordBody) {

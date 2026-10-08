@@ -14,7 +14,11 @@ export interface RegisterBody {
   name: string;
   email: string;
   password: string;
-  inviteCode: string;
+  code: string;
+}
+
+export interface RegisterCodeBody {
+  email: string;
 }
 
 export interface AuthSession {

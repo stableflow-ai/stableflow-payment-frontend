@@ -142,7 +142,8 @@ export function useOrderQuery(id: string) {
 | Method | Path | Auth | Body | Data | API | Hook |
 | --- | --- | --- | --- | --- | --- | --- |
 | POST | `/v1/pay/auth/login` | no | `LoginBody` | `AuthSession` (`user.guideCompleted`) | `login` | `useLoginMutation` |
-| POST | `/v1/pay/auth/register` | no | `RegisterBody` | `AuthSession` | `register` | `useRegisterMutation` |
+| POST | `/v1/pay/auth/register` | no | `RegisterBody` (`code`) | `AuthSession` | `register` | `useRegisterMutation` |
+| POST | `/v1/pay/auth/register/code` | no | `RegisterCodeBody` | `void` | `sendRegisterCode` | `useSendRegisterCodeMutation` |
 | POST | `/v1/pay/change-password` | yes | `ChangePasswordBody` | `void` | `changePassword` | `useChangePasswordMutation` |
 | POST | `/v1/pay/reset-password` | no | `ResetPasswordBody` | `void` | `resetPassword` | `useResetPasswordMutation` |
 | POST | `/v1/pay/reset-password/code` | no | `ResetPasswordCodeBody` | `void` | `sendResetPasswordCode` | `useSendResetPasswordCodeMutation` |
