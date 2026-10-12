@@ -7,7 +7,7 @@ import { AppNav, AppSidebar } from "@/components/layout/AppSidebar";
 import { pageTitleForPath } from "@/components/layout/config";
 import { Drawer } from "@stableflow/pay-ui/drawer";
 import { DRAWER_SIDE } from "@stableflow/pay-ui/drawer";
-import { IconMenu } from "@stableflow/pay-ui/icons/menu";
+import { IconMenu } from "@stableflow/pay-ui/icons/outline/menu";
 
 export function AppLayout() {
   const { pathname } = useLocation();

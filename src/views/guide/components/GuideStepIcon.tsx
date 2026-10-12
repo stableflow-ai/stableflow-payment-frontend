@@ -1,4 +1,4 @@
-import { IconCheck } from "@stableflow/pay-ui/icons/check";
+import { IconCheck } from "@stableflow/pay-ui/icons/outline/check";
 import { cn } from "@/lib/utils";
 
 export function GuideStepIcon({

@@ -1,6 +1,6 @@
 import type { MouseEvent } from "react";
-import { IconCopy } from "@stableflow/pay-ui/icons/copy";
-import { IconOutLink } from "@stableflow/pay-ui/icons/link";
+import { IconCopy } from "@stableflow/pay-ui/icons/outline/copy";
+import { IconOutLink } from "@stableflow/pay-ui/icons/outline/link";
 import { Button } from "@stableflow/pay-ui/button";
 import { BUTTON_SIZE } from "@stableflow/pay-ui/button";
 import { Card } from "@stableflow/pay-ui/card";

@@ -1,7 +1,7 @@
-import { IconAlert } from "@stableflow/pay-ui/icons/alert";
-import { IconCheck } from "@stableflow/pay-ui/icons/check";
-import { IconClose } from "@stableflow/pay-ui/icons/close";
-import { IconLoading } from "@stableflow/pay-ui/icons/loading";
+import { IconAlert } from "@stableflow/pay-ui/icons/outline/alert";
+import { IconCheck } from "@stableflow/pay-ui/icons/outline/check";
+import { IconClose } from "@stableflow/pay-ui/icons/outline/close";
+import { IconLoading } from "@stableflow/pay-ui/icons/outline/loading";
 import { PAYER_WAIT_STATUS, type PayerWaitStatus } from "../config";
 
 export function StatusMark(props: { status: PayerWaitStatus }) {

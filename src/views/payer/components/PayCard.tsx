@@ -1,4 +1,4 @@
-import { IconRefresh } from "@stableflow/pay-ui/icons/refresh";
+import { IconRefresh } from "@stableflow/pay-ui/icons/outline/refresh";
 import { Button } from "@stableflow/pay-ui/button";
 import { Skeleton } from "@stableflow/pay-ui/skeleton";
 import { BUTTON_SIZE } from "@stableflow/pay-ui/button";

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IconCopy } from "@stableflow/pay-ui/icons/copy";
+import { IconCopy } from "@stableflow/pay-ui/icons/outline/copy";
 import { Button } from "@stableflow/pay-ui/button";
 import { BUTTON_SIZE } from "@stableflow/pay-ui/button";
 import { Dialog } from "@stableflow/pay-ui/dialog";

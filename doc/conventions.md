@@ -29,7 +29,7 @@ Rules for humans and agents working in this repository. Anything committed to `s
 
 ## Icons
 
-- Icons are imported from `@stableflow/pay-ui/icons/<name>`. Do not copy them into this repo.
+- Icons are imported from `@stableflow/pay-ui/icons/outline/<name>` or `@stableflow/pay-ui/icons/solid/<name>`. `icons/types` stays. Do not copy them into this repo.
 - **Forbidden:** UI icons under `public/`, new inline SVGs in pages or feature components, third-party icon packs (lucide and similar).
 
 ## Static assets (logo and page art)

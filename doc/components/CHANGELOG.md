@@ -2,6 +2,11 @@
 
 Record changes to how this app uses `@stableflow/pay-ui`, `@stableflow/pay-widgets`, or a local widget such as PaymentsAreaChart.
 
+## 2026-10-12
+
+- **TokenSelectDialog:** `PayWidgetsRoot` passes tokens from `normalizePayConfig(usePayConfigQuery())` and `loading` from `isPending`. The widget no longer fetches pay config. `popularTokens` is removed. The picker is a chain selector: Recently Used cards, Your Tokens, Recent Searches, and Trends Token.
+- **Icons:** Imports use `@stableflow/pay-ui/icons/outline/<name>` or `@stableflow/pay-ui/icons/solid/<name>`. `IconDuration2` imports `icons/solid/duration`. `icons/types` is unchanged.
+
 ## 2026-09-23
 
 - **pay-ui:** Shared components, overlay helpers, and package icons now import from `@stableflow/pay-ui` subpaths. Token select imports `@stableflow/pay-widgets/token-select` through `PayWidgetsRoot`. Local copies of those components and icons are removed. Reports payment-link dropdowns load remaining pages while the link filter is visible, because the package Dropdown has no `onReachEnd`.

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
-import { IconArrowDown } from "@stableflow/pay-ui/icons/arrow-down";
-import { IconLogout } from "@stableflow/pay-ui/icons/logout";
-import { IconResetPassword } from "@stableflow/pay-ui/icons/reset-password";
+import { IconArrowDown } from "@stableflow/pay-ui/icons/outline/arrow-down";
+import { IconLogout } from "@stableflow/pay-ui/icons/outline/logout";
+import { IconResetPassword } from "@stableflow/pay-ui/icons/outline/reset-password";
 import { EmailAvatar } from "@/components/recipient-avatar/EmailAvatar";
 import { FLOATING_ALIGN, FLOATING_SIDE, useFloatingPosition } from "@stableflow/pay-ui/overlay";
 import { cn } from "@/lib/utils";

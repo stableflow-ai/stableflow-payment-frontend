@@ -1,6 +1,6 @@
 import { Fragment, useState } from "react";
-import { IconCheck } from "@stableflow/pay-ui/icons/check";
-import { IconCopy } from "@stableflow/pay-ui/icons/copy";
+import { IconCheck } from "@stableflow/pay-ui/icons/outline/check";
+import { IconCopy } from "@stableflow/pay-ui/icons/outline/copy";
 import { Button } from "@stableflow/pay-ui/button";
 import { BUTTON_SIZE } from "@stableflow/pay-ui/button";
 import { useCreateCheckoutSessionMutation } from "@/hooks/use-checkout-api";

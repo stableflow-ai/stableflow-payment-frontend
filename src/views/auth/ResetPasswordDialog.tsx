@@ -1,7 +1,7 @@
 import { type FormEvent, useEffect, useState } from "react";
 import { Button } from "@stableflow/pay-ui/button";
 import { Dialog } from "@stableflow/pay-ui/dialog";
-import { Icon2Right } from "@stableflow/pay-ui/icons/to-right";
+import { Icon2Right } from "@stableflow/pay-ui/icons/outline/to-right";
 import {
   useChangePasswordMutation,
   useResetPasswordMutation,

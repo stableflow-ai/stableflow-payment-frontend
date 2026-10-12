@@ -1,6 +1,6 @@
 import { useState, type PropsWithChildren, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { IconArrowDown } from "@stableflow/pay-ui/icons/arrow-down";
+import { IconArrowDown } from "@stableflow/pay-ui/icons/outline/arrow-down";
 import { Card } from "@stableflow/pay-ui/card";
 import { Button } from "@stableflow/pay-ui/button";
 import { Drawer } from "@stableflow/pay-ui/drawer";

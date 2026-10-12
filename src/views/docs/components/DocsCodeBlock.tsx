@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { IconCopy } from "@stableflow/pay-ui/icons/copy";
+import { IconCopy } from "@stableflow/pay-ui/icons/outline/copy";
 import useToast from "@/hooks/use-toast";
 import { highlightTokenStyle, useHighlightedCode } from "@/hooks/use-highlighted-code";
 import type { HighlightLanguage } from "@/utils";
