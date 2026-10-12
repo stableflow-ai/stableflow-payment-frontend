@@ -7,7 +7,7 @@ import type { PayerWaitDetails } from "../utils";
 import { CouponShell } from "./CouponShell";
 import { DetailRow, PrivateBadge } from "./DetailRow";
 import { StatusMark } from "./StatusMark";
-import { IconCopy } from "@stableflow/pay-ui/icons/copy";
+import { IconCopy } from "@stableflow/pay-ui/icons/outline/copy";
 import useToast from "@/hooks/use-toast";
 
 function tokenLine(amount: string, symbol: string, network: string) {

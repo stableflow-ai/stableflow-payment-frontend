@@ -87,7 +87,7 @@ doc/                      # Agent-facing docs (English)
 | Kind | Location |
 | --- | --- |
 | Public UI primitive | `@stableflow/pay-ui/<name>` (see doc/components/README.md) |
-| Icon (Figma UI glyph) | `@stableflow/pay-ui/icons/<name>` |
+| Icon (Figma UI glyph) | `@stableflow/pay-ui/icons/outline/<name>` or `@stableflow/pay-ui/icons/solid/<name>` |
 | Product logo | `public/logo.svg` (light) / `public/logo-white.svg` (dark) |
 | Page illustration / photo | `public/<page-or-area>/<name>.png` — not under `icons/` |
 | Page | `src/views/` + register in `src/router/index.tsx` |

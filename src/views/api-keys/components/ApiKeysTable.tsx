@@ -1,7 +1,7 @@
-import { IconCopy } from "@stableflow/pay-ui/icons/copy";
-import { IconDelete } from "@stableflow/pay-ui/icons/delete";
+import { IconCopy } from "@stableflow/pay-ui/icons/outline/copy";
+import { IconDelete } from "@stableflow/pay-ui/icons/outline/delete";
 import { TableSkeletonRows } from "@stableflow/pay-ui/table";
-import { IconPen } from "@stableflow/pay-ui/icons/pen";
+import { IconPen } from "@stableflow/pay-ui/icons/solid/pen";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@stableflow/pay-ui/table";
 import { Tooltip } from "@stableflow/pay-ui/tooltip";
 import type { PayApiKey } from "@/types/api-keys";

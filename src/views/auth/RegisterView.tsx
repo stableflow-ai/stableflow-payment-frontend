@@ -1,7 +1,7 @@
 import { type FormEvent, useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@stableflow/pay-ui/button";
-import { Icon2Right } from "@stableflow/pay-ui/icons/to-right";
+import { Icon2Right } from "@stableflow/pay-ui/icons/outline/to-right";
 import { useRegisterMutation, useSendRegisterCodeMutation } from "@/hooks/use-auth-api";
 import useToast from "@/hooks/use-toast";
 import { AuthShell } from "./AuthShell";

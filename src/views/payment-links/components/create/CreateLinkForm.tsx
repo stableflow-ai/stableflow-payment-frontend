@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { IconAlert } from "@stableflow/pay-ui/icons/alert";
-import { IconQuestion } from "@stableflow/pay-ui/icons/question";
+import { IconAlert } from "@stableflow/pay-ui/icons/outline/alert";
+import { IconQuestion } from "@stableflow/pay-ui/icons/outline/question";
 import { TokenSelectDialog } from "@stableflow/pay-widgets/token-select";
 import { Button } from "@stableflow/pay-ui/button";
 import { BUTTON_SIZE, BUTTON_VARIANT } from "@stableflow/pay-ui/button";

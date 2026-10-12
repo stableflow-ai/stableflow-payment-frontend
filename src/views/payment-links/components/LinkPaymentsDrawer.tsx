@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
-import { IconCheck } from "@stableflow/pay-ui/icons/check";
+import { IconCheck } from "@stableflow/pay-ui/icons/outline/check";
 import { TableSkeletonRows } from "@stableflow/pay-ui/table";
-import { IconExportLink, IconLink, IconOutLink } from "@stableflow/pay-ui/icons/link";
+import { IconExportLink, IconLink, IconOutLink } from "@stableflow/pay-ui/icons/outline/link";
 import { Button } from "@stableflow/pay-ui/button";
 import { BUTTON_SIZE, BUTTON_VARIANT } from "@stableflow/pay-ui/button";
 import { Drawer } from "@stableflow/pay-ui/drawer";

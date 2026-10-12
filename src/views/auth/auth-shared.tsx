@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
 import { useState } from "react";
 import { ApiError } from "@/lib/api-error";
-import { IconAlert } from "@stableflow/pay-ui/icons/alert";
-import { IconEye, IconEyeHidden } from "@stableflow/pay-ui/icons/eye";
+import { IconAlert } from "@stableflow/pay-ui/icons/outline/alert";
+import { IconEye } from "@stableflow/pay-ui/icons/solid/eye";
+import { IconEyeHidden } from "@stableflow/pay-ui/icons/outline/eye-hidden";
 import { cn } from "@/lib/utils";
 import {
   AUTH_FORM_CLASS,

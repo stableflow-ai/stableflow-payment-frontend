@@ -1,10 +1,10 @@
 import type { ComponentType } from "react";
-import { IconCode } from "@stableflow/pay-ui/icons/code";
-import { IconKey } from "@stableflow/pay-ui/icons/key";
-import { IconLink } from "@stableflow/pay-ui/icons/link";
-import { IconOverview } from "@stableflow/pay-ui/icons/overview";
-import { IconRecords2 } from "@stableflow/pay-ui/icons/records";
-import { IconSettings } from "@stableflow/pay-ui/icons/settings";
+import { IconCode } from "@stableflow/pay-ui/icons/outline/code";
+import { IconKey } from "@stableflow/pay-ui/icons/outline/key";
+import { IconLink } from "@stableflow/pay-ui/icons/outline/link";
+import { IconOverview } from "@stableflow/pay-ui/icons/outline/overview";
+import { IconRecords2 } from "@stableflow/pay-ui/icons/outline/records";
+import { IconSettings } from "@stableflow/pay-ui/icons/outline/settings";
 import type { IconProps } from "@stableflow/pay-ui/icons/types";
 import { PRIVACY_TRANSFER_PATH, PRIVACY_TRANSFER_TITLE } from "@/views/privacy-transfer/config";
 

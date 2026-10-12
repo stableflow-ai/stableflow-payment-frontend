@@ -1,4 +1,4 @@
-import { Icon2Right } from "@stableflow/pay-ui/icons/to-right";
+import { Icon2Right } from "@stableflow/pay-ui/icons/outline/to-right";
 import { cn } from "@/lib/utils";
 import { useGuideFlow } from "../guide-flow";
 

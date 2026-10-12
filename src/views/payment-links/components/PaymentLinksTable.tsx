@@ -1,5 +1,5 @@
-import { IconDelete } from "@stableflow/pay-ui/icons/delete";
-import { IconLink, IconOutLink } from "@stableflow/pay-ui/icons/link";
+import { IconDelete } from "@stableflow/pay-ui/icons/outline/delete";
+import { IconLink, IconOutLink } from "@stableflow/pay-ui/icons/outline/link";
 import { Pagination } from "@stableflow/pay-ui/pagination";
 import { SearchInput } from "@stableflow/pay-ui/search-input";
 import { Switch } from "@stableflow/pay-ui/switch";
@@ -14,7 +14,7 @@ import {
   paymentLinkType,
 } from "../utils";
 import { ListEmptyState } from "./ListEmptyState";
-import { IconCopy } from "@stableflow/pay-ui/icons/copy";
+import { IconCopy } from "@stableflow/pay-ui/icons/outline/copy";
 import { TableSkeletonRows } from "@stableflow/pay-ui/table";
 import { formatAddress, formatAmount } from "@/utils";
 import useToast from "@/hooks/use-toast";

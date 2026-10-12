@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { IconArrowDown } from "@stableflow/pay-ui/icons/arrow-down";
+import { IconArrowDown } from "@stableflow/pay-ui/icons/outline/arrow-down";
 import { HeroSection } from "./components/HeroSection";
 import { MeaningSection } from "./components/MeaningSection";
 import { ProblemSection } from "./components/ProblemSection";
