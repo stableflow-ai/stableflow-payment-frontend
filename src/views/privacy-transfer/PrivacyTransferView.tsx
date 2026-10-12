@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Button, BUTTON_SIZE, BUTTON_VARIANT } from "@stableflow/pay-ui/button";
 import { Card } from "@stableflow/pay-ui/card";
-import { IconDelete } from "@stableflow/pay-ui/icons/delete";
-import { IconPlus } from "@stableflow/pay-ui/icons/plus";
+import { IconDelete } from "@stableflow/pay-ui/icons/outline/delete";
+import { IconPlus } from "@stableflow/pay-ui/icons/outline/plus";
 import { InputNumber } from "@stableflow/pay-ui/input-number";
 import { TokenSelectDialog } from "@stableflow/pay-widgets/token-select";
 import { WalletConnectDialog } from "@/components/WalletConnect";
