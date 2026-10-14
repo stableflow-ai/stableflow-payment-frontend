@@ -1,6 +1,6 @@
 import type { IntentsToken } from "@/stores/intents-tokens";
-import { IconFee } from "@stableflow/pay-ui/icons/fee";
-import { IconDuration2 } from "@stableflow/pay-ui/icons/duration";
+import { IconFee } from "@stableflow/pay-ui/icons/solid/fee";
+import { IconDuration2 } from "@stableflow/pay-ui/icons/solid/duration";
 import { getStableflowRouteLogo } from "@/lib/logo";
 
 export function ResultRow(props: {

@@ -1,4 +1,4 @@
-import { IconLink, IconOutLink } from "@stableflow/pay-ui/icons/link";
+import { IconLink, IconOutLink } from "@stableflow/pay-ui/icons/outline/link";
 import { Button } from "@stableflow/pay-ui/button";
 import { BUTTON_SIZE, BUTTON_VARIANT } from "@stableflow/pay-ui/button";
 import useToast from "@/hooks/use-toast";

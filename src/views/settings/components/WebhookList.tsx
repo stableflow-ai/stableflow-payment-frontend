@@ -1,6 +1,6 @@
-import { IconDelete } from "@stableflow/pay-ui/icons/delete";
-import { IconFlask } from "@stableflow/pay-ui/icons/flask";
-import { IconResetPassword } from "@stableflow/pay-ui/icons/reset-password";
+import { IconDelete } from "@stableflow/pay-ui/icons/outline/delete";
+import { IconFlask } from "@stableflow/pay-ui/icons/outline/flask";
+import { IconResetPassword } from "@stableflow/pay-ui/icons/outline/reset-password";
 import { Switch } from "@stableflow/pay-ui/switch";
 import { Tooltip } from "@stableflow/pay-ui/tooltip";
 import type { PayWebhook } from "@/types/webhooks";

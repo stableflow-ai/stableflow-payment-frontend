@@ -1,4 +1,4 @@
-import { IconArrowDown } from "@stableflow/pay-ui/icons/arrow-down";
+import { IconArrowDown } from "@stableflow/pay-ui/icons/outline/arrow-down";
 import { chainLogoUrl } from "@/lib/logo";
 import { cn } from "@/lib/utils";
 import type { IntentsToken } from "@/stores/intents-tokens";
