@@ -4,8 +4,8 @@ import { Card } from "@stableflow/pay-ui/card";
 import { IconDelete } from "@stableflow/pay-ui/icons/outline/delete";
 import { IconPlus } from "@stableflow/pay-ui/icons/outline/plus";
 import { InputNumber } from "@stableflow/pay-ui/input-number";
+import { MyWalletsDrawer } from "@stableflow/pay-widgets/my-wallets";
 import { TokenSelectDialog } from "@stableflow/pay-widgets/token-select";
-import { WalletConnectDialog } from "@/components/WalletConnect";
 import { TokenSelectButton } from "@/views/payment-links/components/create/TokenSelectButton";
 import { activateConfidentialAccount } from "@/lib/confidential/activate";
 import { toIntentsAccountId } from "@/lib/confidential/to-intents-account-id";
@@ -76,7 +76,6 @@ export function PrivacyTransferView() {
   const [linkingKind, setLinkingKind] = useState<IntentsChainKind | null>(null);
   const [tokenPicker, setTokenPicker] = useState<TokenPicker>(null);
   const [walletOpen, setWalletOpen] = useState(false);
-  const [walletKind, setWalletKind] = useState<ChainKind>("evm");
   const [quoting, setQuoting] = useState(false);
   const [plan, setPlan] = useState<PrivacyQuotePlan | null>(null);
   const [retryFromId, setRetryFromId] = useState<string | null>(null);
@@ -133,8 +132,7 @@ export function PrivacyTransferView() {
     }
   }, [destinationToken, sourceToken, tokens]);
 
-  function openWallet(kind: ChainKind) {
-    setWalletKind(kind);
+  function openWallet() {
     setWalletOpen(true);
   }
 
@@ -174,7 +172,7 @@ export function PrivacyTransferView() {
       return;
     }
     if (fundingSource === "wallet" && !sourceWalletAddress) {
-      openWallet(sourceToken.chain.chainKind);
+      openWallet();
       toast.fail({ title: `Connect a ${chainLabel(sourceToken.chain.chainKind)} wallet to fund this transfer.` });
       return;
     }
@@ -320,7 +318,7 @@ export function PrivacyTransferView() {
               <p className="font-montserrat text-sm text-[#909090]">
                 Connect a NEAR, EVM, Solana, or Tron wallet. Zcash cannot link a confidential account.
               </p>
-              <Button size={BUTTON_SIZE.Sm} variant={BUTTON_VARIANT.Normal} onClick={() => openWallet("evm")}>
+              <Button size={BUTTON_SIZE.Sm} variant={BUTTON_VARIANT.Normal} onClick={() => openWallet()}>
                 Connect wallet
               </Button>
             </div>
@@ -368,7 +366,7 @@ export function PrivacyTransferView() {
               <button
                 type="button"
                 className="mt-2 font-montserrat text-sm font-medium text-[#3F8AFB]"
-                onClick={() => openWallet(sourceToken.chain.chainKind)}
+                onClick={() => openWallet()}
               >
                 Connect {chainLabel(sourceToken.chain.chainKind)} funding wallet
               </button>
@@ -546,12 +544,7 @@ export function PrivacyTransferView() {
           setTokenPicker(null);
         }}
       />
-      {walletOpen ? (
-        <WalletConnectDialog
-          preferredKind={walletKind}
-          onClose={() => setWalletOpen(false)}
-        />
-      ) : null}
+      <MyWalletsDrawer open={walletOpen} onClose={() => setWalletOpen(false)} />
     </div>
   );
 }

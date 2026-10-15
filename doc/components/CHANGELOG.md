@@ -4,7 +4,7 @@ Record changes to how this app uses `@stableflow/pay-ui`, `@stableflow/pay-widge
 
 ## 2026-10-15
 
-- **MyWalletsDrawer / WalletChainsButton:** `PayWidgetsRoot` passes `walletKinds`. `PayView` shows `HeaderWalletEntry` in `PayerLayout` and registers a drawer target that sets the origin token. Waiting pages do not show the entry.
+- **MyWalletsDrawer / WalletChainsButton:** `PayWidgetsRoot` passes `walletKinds`. `PayView` shows `HeaderWalletEntry` in `PayerLayout` and registers a drawer target that sets the origin token. Waiting pages do not show the entry. Privacy transfer opens `MyWalletsDrawer` in place of the removed `WalletConnectDialog`.
 
 ## 2026-10-14
 
