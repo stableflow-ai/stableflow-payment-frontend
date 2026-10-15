@@ -4,7 +4,7 @@ import { IconKey } from "@stableflow/pay-ui/icons/outline/key";
 import { IconLink } from "@stableflow/pay-ui/icons/outline/link";
 import { IconOverview } from "@stableflow/pay-ui/icons/outline/overview";
 import { IconRecords2 } from "@stableflow/pay-ui/icons/outline/records";
-import { IconSettings } from "@stableflow/pay-ui/icons/outline/settings";
+import { IconSetting } from "@stableflow/pay-ui/icons/outline/setting";
 import type { IconProps } from "@stableflow/pay-ui/icons/types";
 import { PRIVACY_TRANSFER_PATH, PRIVACY_TRANSFER_TITLE } from "@/views/privacy-transfer/config";
 
@@ -26,7 +26,7 @@ export const SIDEBAR_NAV_ITEMS: readonly SidebarNavItem[] = [
   { label: "Payment Links", to: "/payment-links", icon: IconLink },
   { label: "API Keys", to: "/api-keys", icon: IconKey },
   { label: "Reports", to: "/reports", icon: IconRecords2 },
-  { label: "Settings", to: "/settings", icon: IconSettings },
+  { label: "Settings", to: "/settings", icon: IconSetting },
   { label: "Developer Docs", to: "/docs", icon: IconCode },
 ];
 
