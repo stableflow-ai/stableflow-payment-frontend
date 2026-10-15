@@ -113,11 +113,8 @@
 
 /* Wallet portals need clicks and stacking above Overlay (z-index 1000+). */
 [data-rk],
-.wallet-adapter-modal,
-.wallet-adapter-modal-wrapper,
 .nws-modal,
 .nws-modal-wrapper,
-.adapter-modal,
 .picker-dialog,
 .picker-dialog-bg,
 .ledger-modal-root,
@@ -131,6 +128,12 @@ w3m-modal,
 wcm-modal,
 w3m-overlay {
   z-index: 10000 !important;
+}
+
+/* near-connect iframes. Above Dialog (1000) and the elevated wallet band (10000+). */
+.hot-connector-popup {
+  position: relative;
+  z-index: 100000000;
 }
 
 w3m-modal.open,

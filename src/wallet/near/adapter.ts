@@ -1,9 +1,7 @@
 import { Buffer } from "buffer";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { isAddressValid } from "@/utils";
-import useToast from "@/hooks/use-toast";
 import type { GeneratedIntent, IntentSignInput, IntentSignedPayload, UseWalletResult, WalletAccount } from "../types";
-import { withWalletConnectError } from "../connect-feedback";
 import { useNearWalletContext } from "./provider";
 import {
   INTENTS_RECIPIENT,
@@ -16,37 +14,20 @@ import {
 } from "../intents-sign";
 
 export function useNearWallet(): UseWalletResult {
-  const { connector, accountId, walletIcon, connecting } = useNearWalletContext();
-  const toast = useToast();
-  const [modalOpen, setModalOpen] = useState(false);
+  const { connector, accountId, walletIcon, connecting, pickerOpen, openPicker } = useNearWalletContext();
 
   const account = useMemo<WalletAccount | null>(() => {
     if (!accountId) return null;
     return { address: accountId, chainKind: "near", chainId: "mainnet", icon: walletIcon ?? undefined };
   }, [accountId, walletIcon]);
 
-  useEffect(() => {
-    if (accountId) setModalOpen(false);
-  }, [accountId]);
-
   const connect = useCallback(() => {
-    if (!connector) return;
-    setModalOpen(true);
-    void (async () => {
-      try {
-        if (accountId) {
-          await connector.disconnect().catch(() => {
-            // Still open the picker so the user can switch wallets.
-          });
-        }
-        await withWalletConnectError(toast, () => connector.connect());
-      } catch {
-        // Toast already reported a user rejection.
-      } finally {
-        setModalOpen(false);
-      }
-    })();
-  }, [accountId, connector, toast]);
+    openPicker();
+    if (!connector || !accountId) return;
+    void connector.disconnect().catch(() => {
+      // The picker stays open so the user can switch wallets.
+    });
+  }, [accountId, connector, openPicker]);
 
   const disconnect = useCallback(() => {
     if (!connector) return;
@@ -128,11 +109,11 @@ export function useNearWallet(): UseWalletResult {
     account,
     isConnected: Boolean(accountId),
     isConnecting: connecting,
-    isModalOpen: modalOpen,
+    isModalOpen: pickerOpen,
     connect,
     disconnect,
     signMessage,
     signGeneratedIntent,
     isAddressValid: isAddressValidFn,
-  }), [account, accountId, connect, connecting, disconnect, isAddressValidFn, modalOpen, signGeneratedIntent, signMessage]);
+  }), [account, accountId, connect, connecting, disconnect, isAddressValidFn, pickerOpen, signGeneratedIntent, signMessage]);
 }
