@@ -6,6 +6,7 @@ import { paySwapSubmit } from "@/api/pay";
 import { showMultisigConfirmToast } from "@/components/multisig/multisig-proposal-toast";
 import { useCheckoutSessionQuery } from "@/hooks/use-checkout-session";
 import { usePayOriginToken } from "@/hooks/use-pay-origin-token";
+import { useWalletDrawerTarget } from "@/hooks/use-wallet-drawer-target";
 import { usePaymentLinkQuery } from "@/hooks/use-payment-link";
 import { usePaymentWallet } from "@/hooks/use-payment-wallet";
 import { usePaySwapQuery } from "@/hooks/use-pay-quote-api";
@@ -13,7 +14,7 @@ import useToast from "@/hooks/use-toast";
 import { QUICK_PAY_SLIPPAGE_TOLERANCE } from "@/config/payout";
 import { useAuthStore } from "@/stores/auth";
 import { isSwapConsumed, markSwapConsumed, useConsumedSwapsStore } from "@/stores/consumed-swaps";
-import { useIntentsTokensStore, normalizeSymbol } from "@/stores/intents-tokens";
+import { useIntentsTokensStore, intentsTokenForSelection, normalizeSymbol } from "@/stores/intents-tokens";
 import { useTokenBalancesStore } from "@/stores/token-balances";
 import { PAY_SWAP_TYPE, type PaySwapParam } from "@/types/pay";
 import { formatAmount } from "@/utils";
@@ -26,6 +27,7 @@ import { ZCASH_TRANSPARENT_REFUND_MESSAGE } from "@/wallet/zec/config";
 import type { ChainKind } from "@/wallet";
 import { isPaymentLinkActive, isPaymentLinkOpen } from "@/views/payment-links/utils";
 import { PayerLayout } from "./components/PayerLayout";
+import { HeaderWalletEntry } from "./components/HeaderWalletEntry";
 import { PayCard } from "./components/PayCard";
 import {
   AMOUNT_MAX_DECIMALS,
@@ -88,6 +90,13 @@ export function PayView() {
   const tokens = useIntentsTokensStore((s) => s.tokens);
   const findByChainAndSymbol = useIntentsTokensStore((s) => s.findByChainAndSymbol);
   const { originToken, setOriginToken } = usePayOriginToken();
+  useWalletDrawerTarget({
+    onSelect: (token) => {
+      const next = intentsTokenForSelection(token);
+      if (next) setOriginToken(next);
+    },
+    disabledReason: (token) => (token.supportPayment ? null : "This token cannot be used to pay"),
+  });
   const originKind: ChainKind = originToken?.chain.chainKind ?? "evm";
   const paymentWallet = usePaymentWallet(originKind);
   const wallet = paymentWallet.wallet;
@@ -409,7 +418,10 @@ export function PayView() {
   }
 
   return (
-    <PayerLayout iconUrl={isCheckout ? checkout?.organization.logo : paymentLinkCardIconUrl(link)}>
+    <PayerLayout
+      iconUrl={isCheckout ? checkout?.organization.logo : paymentLinkCardIconUrl(link)}
+      headerEnd={<HeaderWalletEntry />}
+    >
       <PayCard
         state={cardState}
         paymentTitle={payment?.title ?? ""}
