@@ -4,13 +4,14 @@ import { cn } from "@/lib/utils";
 export function PayerLayout(props: {
   iconUrl?: string | null;
   footer?: ReactNode;
+  headerEnd?: ReactNode;
   children?: ReactNode;
 }) {
   const iconUrl = props.iconUrl?.trim() || "";
 
   return (
     <div className="flex min-h-svh flex-col bg-[#f6f6f6] px-4 py-8 md:px-6 md:py-10">
-      <div className=""></div>
+      <div className="flex justify-end">{props.headerEnd}</div>
       {props.children ? (
         <div className="flex flex-1 flex-col items-center justify-center">
           {iconUrl ? (

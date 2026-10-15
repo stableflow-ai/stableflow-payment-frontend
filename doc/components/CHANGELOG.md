@@ -2,6 +2,10 @@
 
 Record changes to how this app uses `@stableflow/pay-ui`, `@stableflow/pay-widgets`, or a local widget such as PaymentsAreaChart.
 
+## 2026-10-15
+
+- **MyWalletsDrawer / WalletChainsButton:** `PayWidgetsRoot` passes `walletKinds`. `PayView` shows `HeaderWalletEntry` in `PayerLayout` and registers a drawer target that sets the origin token. Waiting pages do not show the entry.
+
 ## 2026-10-14
 
 - **WalletSelectDialog:** Solana, Tron, Zcash, and NEAR pickers render `@stableflow/pay-widgets/wallet-select` directly from `src/wallet/*`. The dialog does not go through `PayWidgetsRoot`. EVM uses RainbowKit `modalSize="compact"`.

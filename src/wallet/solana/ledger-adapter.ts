@@ -11,7 +11,7 @@ import {
   WalletConnectWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
 import type { PublicKey, Transaction, TransactionVersion, VersionedTransaction } from "@solana/web3.js";
-import { LEDGER_CONNECT_DIALOG_DELAY_MS, LEDGER_USB_VENDOR_ID } from "./config";
+import { LEDGER_CONNECT_DIALOG_DELAY_MS, LEDGER_USB_VENDOR_ID, LEDGER_WALLET_ICON } from "./config";
 import {
   cancelLedgerConnectChooser,
   LedgerConnectCancelledError,
@@ -69,7 +69,7 @@ async function closeOpenLedgerHidDevices(): Promise<void> {
 export class SolanaLedgerWalletAdapter extends BaseSignerWalletAdapter {
   name = "Ledger" as WalletName<"Ledger">;
   url = ledgerMeta.url;
-  icon = ledgerMeta.icon;
+  icon = LEDGER_WALLET_ICON;
   readonly supportedTransactionVersions: ReadonlySet<TransactionVersion> = new Set(["legacy", 0]);
 
   private readonly hid = new LedgerWalletAdapter({
