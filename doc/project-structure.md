@@ -51,7 +51,6 @@ src/
     layout/               # AppSidebar, AppNav, AccountMenu, AppFooter, sidebar config
     pay-widgets-root.tsx  # PayWidgetsProvider data boundary
     payments-chart/       # Reports area chart (local business widget)
-    WalletConnect.tsx     # Wallet connect dialog (business)
     safe/                 # SafeMultisigBadge (wraps MultisigBadge), showSafeProposalToast
     multisig/             # MultisigBadge, confirm toast, PayFromSquadSection
   hooks/                  # Shared hooks

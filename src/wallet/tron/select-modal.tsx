@@ -1,8 +1,19 @@
+import { AdapterState } from "@tronweb3/tronwallet-abstract-adapter";
 import { useWallet, type Wallet } from "@tronweb3/tronwallet-adapter-react-hooks";
-import { WalletItem, WalletModalContext } from "@tronweb3/tronwallet-adapter-react-ui";
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
-import { createPortal } from "react-dom";
+import { WalletModalContext } from "@tronweb3/tronwallet-adapter-react-ui";
+import { WalletSelectDialog, type WalletSelectOption } from "@stableflow/pay-widgets/wallet-select";
+import { useCallback, useMemo, useState, type ReactNode } from "react";
 import { visibleTronWallets } from "./utils";
+
+function tronWalletOption(wallet: Wallet): WalletSelectOption {
+  const installed = wallet.state !== AdapterState.NotFound && wallet.state !== AdapterState.Loading;
+  return {
+    id: wallet.adapter.name,
+    name: wallet.adapter.name,
+    icon: wallet.adapter.icon,
+    detected: installed ? true : undefined,
+  };
+}
 
 function TronWalletSelectModal({
   visible,
@@ -12,9 +23,8 @@ function TronWalletSelectModal({
   onClose: () => void;
 }) {
   const { wallets, select, wallet, connected, connect } = useWallet();
-  const [fadeIn, setFadeIn] = useState(false);
-  const [render, setRender] = useState(false);
   const walletsList = useMemo(() => visibleTronWallets(wallets), [wallets]);
+  const options = useMemo(() => walletsList.map(tronWalletOption), [walletsList]);
 
   const onWalletClick = useCallback((next: Wallet) => {
     onClose();
@@ -25,53 +35,18 @@ function TronWalletSelectModal({
     select(next.adapter.name);
   }, [connect, connected, onClose, select, wallet?.adapter.name]);
 
-  useEffect(() => {
-    if (visible) {
-      setRender(true);
-      setFadeIn(true);
-      return;
-    }
-    setFadeIn(false);
-    const timer = setTimeout(() => setRender(false), 200);
-    return () => clearTimeout(timer);
-  }, [visible]);
-
-  useEffect(() => {
-    const closeOnEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-    };
-    document.body.addEventListener("keydown", closeOnEscapeKey);
-    return () => document.body.removeEventListener("keydown", closeOnEscapeKey);
-  }, [onClose]);
-
-  if (!render) return null;
-
-  return createPortal(
-    <div
-      data-testid="wallet-select-modal"
-      className={`adapter-modal${fadeIn ? " adapter-modal-fade-in" : ""}`}
-    >
-      <div className="adapter-modal-wrapper">
-        <div className="adapter-modal-header">
-          <button type="button" onClick={onClose} className="close-button" tabIndex={0} />
-          <div className="adapter-modal-title">
-            Connect a wallet on
-            <br />
-            Tron to continue
-          </div>
-        </div>
-        <div className="adapter-list">
-          {walletsList.map((wallet) => (
-            <WalletItem
-              key={wallet.adapter.name}
-              wallet={wallet}
-              onClick={() => onWalletClick(wallet)}
-            />
-          ))}
-        </div>
-      </div>
-    </div>,
-    document.body,
+  return (
+    <WalletSelectDialog
+      open={visible}
+      onClose={onClose}
+      title="Select Tron Wallet"
+      wallets={options}
+      elevated
+      onSelect={(option) => {
+        const next = walletsList.find((item) => item.adapter.name === option.id);
+        if (next) onWalletClick(next);
+      }}
+    />
   );
 }
 

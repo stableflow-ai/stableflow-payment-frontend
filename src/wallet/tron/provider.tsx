@@ -1,5 +1,4 @@
 import { WalletProvider as TronAdapterProvider, useWallet } from "@tronweb3/tronwallet-adapter-react-hooks";
-import "@tronweb3/tronwallet-adapter-react-ui/style.css";
 import {
   BitKeepAdapter,
   OkxWalletAdapter,
