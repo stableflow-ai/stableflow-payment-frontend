@@ -1,5 +1,5 @@
 import { useWallet as useSolanaAdapter } from "@solana/wallet-adapter-react";
-import { useWalletModal as useSolanaWalletModal } from "@solana/wallet-adapter-react-ui";
+import { useSolanaWalletModal } from "./select-modal";
 import { useCallback, useEffect, useMemo } from "react";
 import { isAddressValid } from "@/utils";
 import type { GeneratedIntent, IntentSignInput, IntentSignedPayload, UseWalletResult, WalletAccount } from "../types";

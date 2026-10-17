@@ -1,7 +1,9 @@
 import { NearConnector, type NearWalletBase } from "@hot-labs/near-connect";
+import { WalletSelectDialog } from "@stableflow/pay-widgets/wallet-select";
 import SignClient from "@walletconnect/sign-client";
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -9,18 +11,24 @@ import {
   type ReactNode,
 } from "react";
 import { getLogo } from "@/lib/logo";
+import useToast from "@/hooks/use-toast";
+import { withWalletConnectError } from "../connect-feedback";
 import {
   applyNearConnectWalletAllowlist,
   NEAR_CONNECT_NETWORK,
   NEAR_WALLET_CONNECT_METADATA,
 } from "./config";
 import { setNearConnector } from "./session";
+import { nearWalletOptions } from "./wallets";
 
 interface NearWalletContextValue {
   connector: NearConnector | null;
   accountId: string | null;
   walletIcon: string | null;
   connecting: boolean;
+  pickerOpen: boolean;
+  openPicker: () => void;
+  closePicker: () => void;
 }
 
 const NearWalletContext = createContext<NearWalletContextValue>({
@@ -28,6 +36,9 @@ const NearWalletContext = createContext<NearWalletContextValue>({
   accountId: null,
   walletIcon: null,
   connecting: false,
+  pickerOpen: false,
+  openPicker: () => {},
+  closePicker: () => {},
 });
 
 function createNearWalletConnectClient() {
@@ -51,6 +62,9 @@ export function NearWalletProvider({ children }: { children: ReactNode }) {
   const [accountId, setAccountId] = useState<string | null>(null);
   const [walletIcon, setWalletIcon] = useState<string | null>(null);
   const [connecting, setConnecting] = useState(true);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const openPicker = useCallback(() => setPickerOpen(true), []);
+  const closePicker = useCallback(() => setPickerOpen(false), []);
 
   useEffect(() => {
     let cancelled = false;
@@ -105,12 +119,45 @@ export function NearWalletProvider({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  useEffect(() => {
+    if (accountId) setPickerOpen(false);
+  }, [accountId]);
+
   const value = useMemo<NearWalletContextValue>(
-    () => ({ connector, accountId, walletIcon, connecting }),
-    [connector, accountId, walletIcon, connecting],
+    () => ({ connector, accountId, walletIcon, connecting, pickerOpen, openPicker, closePicker }),
+    [accountId, closePicker, connecting, connector, openPicker, pickerOpen, walletIcon],
   );
 
-  return <NearWalletContext.Provider value={value}>{children}</NearWalletContext.Provider>;
+  return (
+    <NearWalletContext.Provider value={value}>
+      {children}
+      <NearWalletSelectDialog />
+    </NearWalletContext.Provider>
+  );
+}
+
+function NearWalletSelectDialog() {
+  const { connector, connecting, pickerOpen, closePicker } = useNearWalletContext();
+  const toast = useToast();
+  const wallets = connector ? nearWalletOptions(connector.availableWallets) : [];
+
+  return (
+    <WalletSelectDialog
+      open={pickerOpen}
+      onClose={closePicker}
+      title="Select NEAR Wallet"
+      wallets={wallets}
+      loading={connecting || !connector}
+      elevated
+      onSelect={(wallet) => {
+        closePicker();
+        if (!connector) return;
+        void withWalletConnectError(toast, () => connector.connect({ walletId: wallet.id })).catch(() => {
+          // Toast already reported a user rejection.
+        });
+      }}
+    />
+  );
 }
 
 export function useNearWalletContext() {

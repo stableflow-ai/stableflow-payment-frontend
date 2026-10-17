@@ -19,7 +19,7 @@ import { WalletSync } from "./WalletSync";
 export function WalletProvider({ children }: { children: ReactNode }) {
   return (
     <WagmiProvider config={wagmiConfig}>
-      <RainbowKitProvider>
+      <RainbowKitProvider modalSize="compact">
         <SolanaWalletProvider>
           <NearWalletProvider>
             <TronWalletProvider>

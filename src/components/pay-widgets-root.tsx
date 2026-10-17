@@ -1,8 +1,10 @@
 import { useCallback, useMemo, type ReactNode } from "react";
 import {
+  defaultWalletKindMeta,
   normalizePayConfig,
   PayWidgetsProvider,
   type ReadBalances,
+  type WalletKindMeta,
 } from "@stableflow/pay-widgets/token-select";
 import useToast from "@/hooks/use-toast";
 import { usePayConfigQuery } from "@/hooks/use-pay-config";
@@ -24,6 +26,14 @@ export function PayWidgetsRoot({ children }: { children: ReactNode }) {
   const toast = useToast();
   const { data, isPending } = usePayConfigQuery();
   const tokens = useMemo(() => (data ? normalizePayConfig(data) : []), [data]);
+  const walletKinds = useMemo(() => {
+    const next: WalletKindMeta[] = [];
+    for (const kind of CHAIN_KINDS) {
+      const meta = defaultWalletKindMeta(kind);
+      if (meta) next.push(meta);
+    }
+    return next;
+  }, []);
 
   const accounts = useMemo(() => {
     const next = {} as Record<ChainKind, {
@@ -98,6 +108,7 @@ export function PayWidgetsRoot({ children }: { children: ReactNode }) {
     <PayWidgetsProvider
       tokens={tokens}
       loading={isPending}
+      walletKinds={walletKinds}
       wallet={{ accounts, connect: connectKind, disconnect: disconnectKind }}
       readBalances={readBalances}
       onCopyAddress={onCopyAddress}
